@@ -42,7 +42,7 @@
             </span>
 
             <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light">
-                {{ $post->truncatedDescription() }}
+            
             </p>
 
             <a href="/blog/{{ $post->slug }}" class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
@@ -59,11 +59,17 @@
                 </span>
 
                 <span class="float-right">
+                <form 
+                action="/blog/{{ $post->slug }}"
+                method="POST">
+                @csrf
+                @method('delete')
                         <button
                             class="text-red-500 pr-3"
                             type="submit">
                             Delete
                         </button>
+                </form>
                 </span>
             @endif
         </div>

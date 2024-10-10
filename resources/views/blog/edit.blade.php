@@ -23,15 +23,15 @@
 
 <div class="w-4/5 m-auto pt-20">
     <form 
-        action="/blog/{{ $post->slug }}"
+    action="/blog/$post"
         method="POST"
         enctype="multipart/form-data">
         @csrf
         @method('PUT')
-
         <input 
             type="text"
             name="title"
+            placeholder="Title..."
             value="{{ $post->title }}"
             class="bg-transparent block border-b-2 w-full h-20 text-6xl outline-none">
 

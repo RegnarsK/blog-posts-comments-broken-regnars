@@ -28,7 +28,7 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(request $request, $post)
+    public function create(request $request)
     {
         return view('blog.create');
     }
@@ -39,7 +39,7 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $post)
+    public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
@@ -69,14 +69,15 @@ class PostsController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($slug, post $post)
     {
-        $post = null;
-        if (is_numeric($slug) && (int)$slug == $slug) {
-            $post = Post::find($slug);
-        } else {
-            $post = Post::where('slug', $slug)->first();
-        }
+        // $post = null;
+        // if (is_numeric($slug) && (int)$slug == $slug) {
+        //     $post = Post::find($slug);
+        // } else {
+        //     $post = Post::where('slug', $slug)->first();
+        // }
+        return view('blog.show', ['post'=>$post]);
 
     }
 
@@ -88,7 +89,7 @@ class PostsController extends Controller
      */
     public function edit($slug, post $post)
     {
-        return view('blog.edit');
+        return view('blog.edit', ['post'=>$post]);
     }
 
     /**
