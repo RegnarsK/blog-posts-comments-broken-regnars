@@ -28,7 +28,7 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(request $request, $post)
     {
         return view('blog.create');
     }
@@ -39,7 +39,7 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $post)
     {
         $request->validate([
             'title' => 'required',
@@ -50,7 +50,7 @@ class PostsController extends Controller
         $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
 
         $request->image->move(public_path('images'), $newImageName);
-
+        
         Post::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
@@ -86,9 +86,9 @@ class PostsController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function edit($slug)
+    public function edit($slug, post $post)
     {
-
+        return view('blog.edit');
     }
 
     /**
@@ -98,7 +98,7 @@ class PostsController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $slug)
+    public function update(Request $request, $slug, post $post)
     {
         $request->validate([
             'title' => 'required',
